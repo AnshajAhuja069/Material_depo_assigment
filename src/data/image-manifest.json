@@ -1,0 +1,197 @@
+{
+  "/boards/board-1.webp": {
+    "width": 1200,
+    "height": 1800,
+    "source": "figma-board-export"
+  },
+  "/boards/board-2.webp": {
+    "width": 1200,
+    "height": 1800,
+    "source": "figma-board-export"
+  },
+  "/boards/board-3.webp": {
+    "width": 1200,
+    "height": 1800,
+    "source": "figma-board-export"
+  },
+  "/boards/board-4.webp": {
+    "width": 1200,
+    "height": 1800,
+    "source": "figma-board-export"
+  },
+  "/boards/board-5.webp": {
+    "width": 1200,
+    "height": 1800,
+    "source": "figma-board-export"
+  },
+  "/stories/botanical-sanctuary/bath.webp": {
+    "width": 325,
+    "height": 402,
+    "source": "board-crop"
+  },
+  "/stories/botanical-sanctuary/bathroom.webp": {
+    "width": 718,
+    "height": 538,
+    "source": "board-crop"
+  },
+  "/stories/botanical-sanctuary/detail.webp": {
+    "width": 622,
+    "height": 206,
+    "source": "board-crop"
+  },
+  "/stories/botanical-sanctuary/dining.webp": {
+    "width": 358,
+    "height": 402,
+    "source": "board-crop"
+  },
+  "/stories/botanical-sanctuary/moodboard.webp": {
+    "width": 345,
+    "height": 411,
+    "source": "board-crop"
+  },
+  "/stories/botanical-sanctuary/swatch.webp": {
+    "width": 325,
+    "height": 563,
+    "source": "board-crop"
+  },
+  "/stories/botanical-sanctuary/tile.webp": {
+    "width": 325,
+    "height": 563,
+    "source": "board-crop"
+  },
+  "/stories/casa-terracotta/bathroom.webp": {
+    "width": 1448,
+    "height": 1086,
+    "source": "figma-raw"
+  },
+  "/stories/casa-terracotta/detail.webp": {
+    "width": 2172,
+    "height": 724,
+    "source": "figma-raw"
+  },
+  "/stories/casa-terracotta/kitchen.webp": {
+    "width": 693,
+    "height": 520,
+    "source": "board-crop"
+  },
+  "/stories/casa-terracotta/moodboard.webp": {
+    "width": 1122,
+    "height": 1402,
+    "source": "figma-raw"
+  },
+  "/stories/casa-terracotta/patio.webp": {
+    "width": 348,
+    "height": 398,
+    "source": "board-crop"
+  },
+  "/stories/casa-terracotta/swatch.webp": {
+    "width": 692,
+    "height": 1178,
+    "source": "figma-raw"
+  },
+  "/stories/casa-terracotta/tile.webp": {
+    "width": 1122,
+    "height": 1402,
+    "source": "figma-raw"
+  },
+  "/stories/monaco-after-dark/bathroom.webp": {
+    "width": 693,
+    "height": 536,
+    "source": "board-crop"
+  },
+  "/stories/monaco-after-dark/detail.webp": {
+    "width": 642,
+    "height": 204,
+    "source": "board-crop"
+  },
+  "/stories/monaco-after-dark/living.webp": {
+    "width": 691,
+    "height": 388,
+    "source": "board-crop"
+  },
+  "/stories/monaco-after-dark/moodboard.webp": {
+    "width": 338,
+    "height": 424,
+    "source": "board-crop"
+  },
+  "/stories/monaco-after-dark/swatch.webp": {
+    "width": 349,
+    "height": 612,
+    "source": "board-crop"
+  },
+  "/stories/monaco-after-dark/tile.webp": {
+    "width": 349,
+    "height": 612,
+    "source": "board-crop"
+  },
+  "/stories/nordic-daylight/detail.webp": {
+    "width": 2172,
+    "height": 724,
+    "source": "figma-raw"
+  },
+  "/stories/nordic-daylight/hero.webp": {
+    "width": 1448,
+    "height": 1086,
+    "source": "figma-raw"
+  },
+  "/stories/nordic-daylight/kitchen.webp": {
+    "width": 1448,
+    "height": 1086,
+    "source": "figma-raw"
+  },
+  "/stories/nordic-daylight/moodboard.webp": {
+    "width": 1122,
+    "height": 1402,
+    "source": "figma-raw"
+  },
+  "/stories/nordic-daylight/swatch.webp": {
+    "width": 756,
+    "height": 1516,
+    "source": "figma-raw"
+  },
+  "/stories/nordic-daylight/tile.webp": {
+    "width": 971,
+    "height": 1619,
+    "source": "figma-raw"
+  },
+  "/stories/tidal-ritual/detail.webp": {
+    "width": 1042,
+    "height": 370,
+    "source": "figma-raw"
+  },
+  "/stories/tidal-ritual/hero.webp": {
+    "width": 1448,
+    "height": 1086,
+    "source": "figma-raw"
+  },
+  "/stories/tidal-ritual/moodboard.webp": {
+    "width": 1122,
+    "height": 1402,
+    "source": "figma-raw"
+  },
+  "/stories/tidal-ritual/shower.webp": {
+    "width": 1448,
+    "height": 1086,
+    "source": "figma-raw"
+  },
+  "/stories/tidal-ritual/swatch.webp": {
+    "width": 526,
+    "height": 912,
+    "source": "figma-raw"
+  },
+  "/stories/tidal-ritual/tile-sheet.webp": {
+    "width": 1122,
+    "height": 1402,
+    "source": "figma-raw"
+  },
+  "/stories/tidal-ritual/tile.webp": {
+    "width": 542,
+    "height": 930,
+    "source": "figma-raw"
+  },
+  "/stories/tidal-ritual/vanity.webp": {
+    "width": 1448,
+    "height": 1086,
+    "source": "figma-raw"
+  }
+}

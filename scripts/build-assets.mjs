@@ -11,9 +11,10 @@
 
 import { readdir, mkdir, writeFile, access, readFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = path.join(root, "assets-src");
 const OUT = path.join(root, "public");
 const MANIFEST = path.join(root, "src", "data", "image-manifest.json");
@@ -64,6 +65,28 @@ const sheetCrops = {
   },
 };
 
+// Tight texture swatches (no studio margins) cut from each tile study.
+// `null` = use the whole tile image. Coordinates are in tile.png pixel space.
+const swatchCrops = {
+  "tidal-ritual": [8, 8, 526, 912],
+  "nordic-daylight": [112, 52, 756, 1516],
+  "casa-terracotta": [214, 79, 692, 1178],
+  "monaco-after-dark": null,
+  "botanical-sanctuary": null,
+};
+
+async function makeSwatches(provenance) {
+  for (const [slug, crop] of Object.entries(swatchCrops)) {
+    const target = path.join(SRC, slug, "swatch.png");
+    if (await exists(target)) continue;
+    const input = sharp(path.join(SRC, slug, "tile.png"));
+    const out = crop ? input.extract({ left: crop[0], top: crop[1], width: crop[2], height: crop[3] }) : input;
+    await out.png().toFile(target);
+    provenance[`${slug}/swatch`] = provenance[`${slug}/tile`] ?? "figma-raw";
+    console.log("swatch", slug);
+  }
+}
+
 async function makeCrops() {
   const provenance = (await exists(PROVENANCE)) ? JSON.parse(await readFile(PROVENANCE, "utf8")) : {};
 
@@ -80,7 +103,12 @@ async function makeCrops() {
   for (const [slug, { board, crops }] of Object.entries(boardCrops)) {
     for (const [name, [x, y, w, h]] of Object.entries(crops)) {
       const target = path.join(SRC, slug, `${name}.png`);
-      if (await exists(target)) continue;
+      if (await exists(target)) {
+        // A replaced, higher-resolution original is no longer a board crop.
+        const { width } = await sharp(target).metadata();
+        if (width !== w - 2) provenance[`${slug}/${name}`] = "figma-raw";
+        continue;
+      }
       // Inset by 1px so anti-aliased frame edges never show.
       await sharp(path.join(SRC, "boards", `board-${board}.png`))
         .extract({ left: x + 1, top: y + 1, width: w - 2, height: h - 2 })
@@ -91,6 +119,7 @@ async function makeCrops() {
     }
   }
 
+  await makeSwatches(provenance);
   await writeFile(PROVENANCE, JSON.stringify(provenance, null, 2));
   return provenance;
 }

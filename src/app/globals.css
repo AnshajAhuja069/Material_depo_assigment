@@ -1,26 +1,132 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
+/* Neutral exhibition defaults; each route overrides these via <ThemeStyle>. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f3efe8;
+  --surface: #e9e3d8;
+  --ink: #161514;
+  --muted: #5a564f;
+  --accent: #161514;
+  --accent-ink: #161514;
+  --line: rgba(22, 21, 20, 0.14);
+  --gutter: clamp(16px, 4vw, 56px);
+  --header-h: 64px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-line: var(--line);
+  --font-serif: var(--font-instrument), "Times New Roman", serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --breakpoint-xs: 400px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  transition:
+    background-color 0.9s cubic-bezier(0.65, 0, 0.35, 1),
+    color 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 3px;
+}
+
+/* ——— Editorial type system ——— */
+@utility gutter {
+  padding-inline: var(--gutter);
+}
+
+@utility display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@utility text-hero {
+  font-size: clamp(3.4rem, 13vw, 13rem);
+}
+
+@utility text-title {
+  font-size: clamp(2.6rem, 8vw, 7.5rem);
+}
+
+@utility text-headline {
+  font-size: clamp(2.1rem, 5.2vw, 4.75rem);
+}
+
+@utility text-lede {
+  font-size: clamp(1.15rem, 1.9vw, 1.6rem);
+  line-height: 1.45;
+}
+
+@utility hairline {
+  border-color: var(--line);
+}
+
+/* Link underline that grows from the left. */
+@utility link-line {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+/* Slow scroll cue. */
+@keyframes cue {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(100%); }
+}
+
+@utility animate-cue {
+  animation: cue 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  body {
+    transition: none;
+  }
 }
