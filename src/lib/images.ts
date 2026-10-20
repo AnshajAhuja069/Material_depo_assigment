@@ -1,7 +1,14 @@
 import manifest from "@/data/image-manifest.json";
 
 /** Where an image came from — surfaced in captions and credits. */
-export type ImageSource = "figma-raw" | "board-crop" | "figma-board-export";
+export type ImageSource = "figma-raw" | "board-crop" | "figma-board-export" | "ai-concept";
+
+export const sourceLabel: Record<ImageSource, string> = {
+  "figma-raw": "Original Figma asset",
+  "board-crop": "Cropped from the original Figma board",
+  "figma-board-export": "Original Figma board export",
+  "ai-concept": "AI-generated concept visual, made for this revision",
+};
 
 /** What an image depicts — interiors are always labelled as concept visualizations. */
 export type ImageKind = "interior-concept" | "material-study" | "material-composition" | "board";

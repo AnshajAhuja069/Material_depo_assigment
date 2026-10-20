@@ -44,6 +44,11 @@
     "height": 402,
     "source": "board-crop"
   },
+  "/stories/botanical-sanctuary/living.webp": {
+    "width": 1536,
+    "height": 1024,
+    "source": "ai-concept"
+  },
   "/stories/botanical-sanctuary/moodboard.webp": {
     "width": 345,
     "height": 411,
@@ -59,6 +64,11 @@
     "height": 563,
     "source": "board-crop"
   },
+  "/stories/casa-terracotta/balcony.webp": {
+    "width": 1536,
+    "height": 1024,
+    "source": "ai-concept"
+  },
   "/stories/casa-terracotta/bathroom.webp": {
     "width": 1448,
     "height": 1086,
@@ -73,6 +83,11 @@
     "width": 693,
     "height": 520,
     "source": "board-crop"
+  },
+  "/stories/casa-terracotta/living.webp": {
+    "width": 1536,
+    "height": 1024,
+    "source": "ai-concept"
   },
   "/stories/casa-terracotta/moodboard.webp": {
     "width": 1122,
@@ -104,6 +119,16 @@
     "height": 204,
     "source": "board-crop"
   },
+  "/stories/monaco-after-dark/dining.webp": {
+    "width": 1536,
+    "height": 1024,
+    "source": "ai-concept"
+  },
+  "/stories/monaco-after-dark/living-room.webp": {
+    "width": 1536,
+    "height": 1024,
+    "source": "ai-concept"
+  },
   "/stories/monaco-after-dark/living.webp": {
     "width": 691,
     "height": 388,
@@ -114,6 +139,11 @@
     "height": 424,
     "source": "board-crop"
   },
+  "/stories/monaco-after-dark/powder.webp": {
+    "width": 1536,
+    "height": 1024,
+    "source": "ai-concept"
+  },
   "/stories/monaco-after-dark/swatch.webp": {
     "width": 349,
     "height": 612,
@@ -123,6 +153,11 @@
     "width": 349,
     "height": 612,
     "source": "board-crop"
+  },
+  "/stories/nordic-daylight/bedroom.webp": {
+    "width": 1536,
+    "height": 1024,
+    "source": "ai-concept"
   },
   "/stories/nordic-daylight/detail.webp": {
     "width": 2172,
@@ -163,6 +198,16 @@
     "width": 1448,
     "height": 1086,
     "source": "figma-raw"
+  },
+  "/stories/tidal-ritual/kitchen.webp": {
+    "width": 1536,
+    "height": 1024,
+    "source": "ai-concept"
+  },
+  "/stories/tidal-ritual/living.webp": {
+    "width": 1536,
+    "height": 1024,
+    "source": "ai-concept"
   },
   "/stories/tidal-ritual/moodboard.webp": {
     "width": 1122,

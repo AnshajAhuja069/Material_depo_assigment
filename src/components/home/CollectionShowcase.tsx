@@ -11,6 +11,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { usePageTransition } from "@/components/motion/PageTransition";
 import { useReducedMotionSafe } from "@/components/motion/hooks";
 import { applyTheme, themeVars } from "@/lib/theme";
+import { getHome } from "@/data/homes";
+import { getMaterial } from "@/data/materials";
+import { SampleImage } from "@/components/curation/SampleImage";
 
 const cssVarsOnly = (vars: Record<string, string>) => Object.fromEntries(Object.entries(vars).filter(([k]) => k.startsWith("--")));
 
@@ -44,6 +47,7 @@ function Panel({
   const dim = useTransform(progress, [i / (n - 1), Math.min(1, (i + 1) / (n - 1))], stacked && i < n - 1 ? [0, 0.35] : [0, 0]);
   const imgY = useTransform(progress, [(i - 1) / (n - 1), (i + 1) / (n - 1)], stacked ? ["-6%", "6%"] : ["0%", "0%"]);
   const href = `/stories/${story.slug}`;
+  const home = getHome(story.slug);
 
   const enter = (e: React.MouseEvent) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
@@ -76,29 +80,32 @@ function Panel({
             <p className="display mt-2 text-[clamp(1.25rem,2vw,1.7rem)] italic" style={{ color: story.theme.muted }}>
               {story.subtitle}
             </p>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed [@media(max-height:760px)]:hidden" style={{ color: story.theme.muted }}>
-              {story.narrative}
+            <p className="eyebrow mt-5" style={{ color: story.theme.ink }}>
+              {home.name}
             </p>
-            <div className="mt-8 flex items-center gap-5">
-              <span className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full ring-1 ring-black/10 md:h-24 md:w-24">
-                <Image src={story.images.swatch.src} alt="" fill sizes="96px" className="object-cover" />
-              </span>
-              <span className="text-xs leading-relaxed" style={{ color: story.theme.muted }}>
-                <span className="eyebrow block" style={{ color: story.theme.ink }}>
-                  {story.product.code}
-                </span>
-                {story.product.name}
-                <br />
-                {story.product.size} · {story.product.finish}
-              </span>
-            </div>
+            <p className="mt-2 max-w-sm text-sm leading-relaxed [@media(max-height:760px)]:hidden" style={{ color: story.theme.muted }}>
+              {home.concept}
+            </p>
+            <ul className="mt-6 flex gap-1.5" aria-label={`${home.materials.length} curated materials`}>
+              {home.materials.map((c) => {
+                const m = getMaterial(c.material);
+                return (
+                  <li key={c.material} className="group/s relative h-14 w-11 overflow-hidden ring-1 ring-black/10 md:h-16 md:w-12" title={`${m.code ?? "Concept"} · ${m.name}`}>
+                    <SampleImage material={m} sizes="48px" height={160} />
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="mt-2 text-xs" style={{ color: story.theme.muted }}>
+              {home.materials.length} materials · {home.rooms.map((r) => r.name.toLowerCase()).join(" · ")}
+            </p>
             <Link
               href={href}
               onClick={enter}
               className="group mt-8 inline-flex h-14 items-center gap-3 rounded-full px-7"
               style={{ background: story.theme.ink, color: story.theme.bg }}
             >
-              <span className="eyebrow">Explore the story</span>
+              <span className="eyebrow">Explore the whole home</span>
               <ArrowRight size={16} aria-hidden className="transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
@@ -111,14 +118,19 @@ function Panel({
           >
             <motion.div className="absolute -inset-y-[7%] inset-x-0" style={{ y: imgY }}>
               <Image
-                src={story.images.hero.src}
+                src={home.rooms[0].image.src}
                 alt=""
                 fill
                 sizes="(min-width: 768px) 56vw, 100vw"
                 className="object-cover transition-transform duration-[1.6s] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
               />
             </motion.div>
-            <span className="eyebrow absolute bottom-3 left-3 bg-black/45 px-2 py-1 text-white">Concept visualization</span>
+            {/* A second room, inset: the same language in a different function */}
+            <span className="absolute bottom-4 right-4 block aspect-[4/3] w-[38%] overflow-hidden shadow-2xl ring-4 ring-white/90">
+              <Image src={home.rooms[1].image.src} alt="" fill sizes="22vw" className="object-cover" />
+              <span className="eyebrow absolute bottom-1.5 left-1.5 bg-black/50 px-1.5 py-0.5 text-[10px] text-white">{home.rooms[1].name}</span>
+            </span>
+            <span className="eyebrow absolute bottom-3 left-3 bg-black/45 px-2 py-1 text-white">{home.rooms[0].name} · concept visualization</span>
           </Link>
         </div>
         <motion.span aria-hidden className="pointer-events-none absolute inset-0 bg-black" style={{ opacity: dim }} />
@@ -154,8 +166,7 @@ export function CollectionShowcase() {
         <AnimatedHeadline id="collection-heading" text="Five Stories. Five Ways to Feel at Home." className="display text-title mt-4 max-w-5xl" />
         <Reveal delay={0.15}>
           <p className="text-lede mt-6 max-w-2xl text-muted">
-            Each story pairs one real Material Depot tile with an emotion, a palette and a set of rooms. Scroll through the five worlds, then step
-            inside one.
+            Each home curates six or seven materials, five to six of them real Material Depot products, into one language applied across three rooms. Scroll through the five homes, then step inside one.
           </p>
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2" aria-hidden>
             {stories.map((s) => (

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { stories } from "@/data/stories";
+import { getHome } from "@/data/homes";
 import { ease } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
@@ -52,13 +53,13 @@ export function StoryNavigator({ activeSlug, onNavigate }: Props) {
                         <span key={s.hex} className="h-3 w-3 sm:h-3.5 sm:w-5" style={{ background: s.hex }} />
                       ))}
                     </span>
-                    <span className="truncate text-xs text-muted sm:text-sm">{story.subtitle}</span>
+                    <span className="truncate text-xs text-muted sm:text-sm">{getHome(story.slug).name} · {story.subtitle}</span>
                   </span>
                 </span>
                 <span className="relative flex items-center gap-4">
                   <span className="relative hidden h-16 w-24 overflow-hidden sm:block">
                     <Image
-                      src={story.images.hero.src}
+                      src={getHome(story.slug).heroImage.src}
                       alt=""
                       fill
                       sizes="96px"

@@ -23,11 +23,11 @@ const decisions = [
   },
   {
     title: "Lifestyle-first storytelling",
-    text: "The large room image shows how a material feels in context, rather than presenting a tile sample with no application.",
+    text: "Room images show how a material family feels in context. The revision expands this from one room to three rooms per home.",
   },
   {
     title: "Material credibility",
-    text: "The original product reference, tile detail crops, dimensions and complementary finishes connect emotional storytelling to a real selection process.",
+    text: "Codes, dimensions, finishes and listed uses for every curated material connect the story to a real selection process.",
   },
   {
     title: "Physical and digital continuity",
@@ -44,12 +44,12 @@ export function DesignSystemBoards() {
     <section id="boards" className="gutter scroll-mt-16 border-t hairline py-[14vh]" aria-labelledby="boards-heading">
       <div className="grid gap-8 lg:grid-cols-12">
         <div className="lg:col-span-8">
-          <p className="eyebrow text-muted">The Figma work</p>
-          <AnimatedHeadline id="boards-heading" text="One Design System. Five Material Identities." className="display text-title mt-4" />
+          <p className="eyebrow text-muted">Initial visual exploration</p>
+          <AnimatedHeadline id="boards-heading" text="Where the Stories Began" className="display text-title mt-4" />
         </div>
         <Reveal className="self-end lg:col-span-4">
           <p className="leading-relaxed text-muted">
-            The five finished boards, exactly as designed. Select any board to inspect it at full resolution, or open the complete file in Figma.
+            The first round of boards studied one anchor tile per story. That exploration became the seed of each home&apos;s palette, and the whole-home curation now supersedes it. The boards are kept here as process.
           </p>
           <a
             href={site.figmaFile}
@@ -96,7 +96,8 @@ export function DesignSystemBoards() {
         ))}
       </ul>
 
-      <ol className="mt-24 grid gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+      <p className="eyebrow mt-24 text-muted">What carries forward into the revised whole-home boards</p>
+      <ol className="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
         {decisions.map((d, i) => (
           <Reveal as="li" key={d.title} delay={(i % 3) * 0.08} className="border-t hairline pt-5">
             <p className="eyebrow tabular-nums text-muted">{String(i + 1).padStart(2, "0")}</p>

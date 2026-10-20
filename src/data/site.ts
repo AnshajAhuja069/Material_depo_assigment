@@ -6,8 +6,8 @@ export const figmaFrameUrl = (nodeId: string) => `${FIGMA_FILE}?node-id=${nodeId
 
 export const site = {
   name: "Material Stories",
-  headline: "Five Materials. Five Stories. Infinite Possibilities.",
-  supporting: "An exploration of how surfaces shape the spaces we inhabit and the stories we live.",
+  headline: "Five Stories. Five Homes. One Language of Design.",
+  supporting: "Exploring how different materials come together to create cohesive spaces across an entire home.",
   designer: "Anshaj Ahuja",
   figmaFile: `${FIGMA_FILE}?node-id=0-1`,
   disclaimer:

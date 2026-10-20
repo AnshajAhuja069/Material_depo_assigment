@@ -8,11 +8,14 @@ import { PaletteBars } from "@/components/story/PaletteBars";
 import { instant, useReducedMotionSafe } from "@/components/motion/hooks";
 import { motionTokens } from "@/lib/motion";
 import { cn } from "@/lib/cn";
+import { getHome } from "@/data/homes";
+import { getMaterial } from "@/data/materials";
+import { SampleImage } from "@/components/curation/SampleImage";
 
 function Eyebrow({ story }: { story: Story }) {
   return (
     <p className="eyebrow text-muted">
-      Material Stories / {story.number}—05
+      Material Stories / {story.number}—05 · {getHome(story.slug).name}
     </p>
   );
 }
@@ -28,6 +31,32 @@ function Subtitle({ story, className, delay = 0.7 }: { story: Story; className?:
     >
       {story.subtitle}
     </motion.p>
+  );
+}
+
+/** The home at a glance: its material family, counted. */
+function HomeMeta({ story, className, delay = 0.9 }: { story: Story; className?: string; delay?: number }) {
+  const reduced = useReducedMotionSafe();
+  const home = getHome(story.slug);
+  return (
+    <motion.div
+      className={cn("flex flex-wrap items-center gap-x-4 gap-y-3", className)}
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={reduced ? instant : { duration: 0.9, delay }}
+    >
+      <span className="flex -space-x-2" aria-hidden>
+        {home.materials.map((c) => (
+          <span key={c.material} className="relative h-9 w-9 overflow-hidden rounded-full ring-2 ring-bg">
+            <SampleImage material={getMaterial(c.material)} sizes="36px" height={100} />
+          </span>
+        ))}
+      </span>
+      <span className="text-sm">
+        <strong className="font-semibold">{home.materials.length} curated materials · {home.rooms.length} rooms</strong>
+        <span className="block text-xs text-muted">{home.mood}</span>
+      </span>
+    </motion.div>
   );
 }
 
@@ -77,7 +106,8 @@ function ScrollCue({ className }: { className?: string }) {
 
 /** Five hero compositions — one per story — sharing the same parts. */
 export function MaterialHero({ story }: { story: Story }) {
-  const { heroLayout: layout, motion: style, images } = story;
+  const { heroLayout: layout, motion: style } = story;
+  const heroImage = getHome(story.slug).heroImage;
 
   if (layout === "wide") {
     return (
@@ -87,11 +117,12 @@ export function MaterialHero({ story }: { story: Story }) {
             <Eyebrow story={story} />
             <Title story={story} className="text-hero mt-6" />
             <Subtitle story={story} className="mt-4" />
+            <HomeMeta story={story} className="mt-6" />
           </div>
           <PaletteBars palette={story.palette} className="hidden md:flex" />
         </div>
         <RevealImage
-          image={images.hero}
+          image={heroImage}
           style={style}
           priority
           sizes="(min-width: 1440px) 1400px, 100vw"
@@ -117,12 +148,13 @@ export function MaterialHero({ story }: { story: Story }) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 2.2, ease: motionTokens.cinematic.ease, delay: 0.8 }}
           />
-          <RevealImage image={images.hero} style={style} priority sizes="(min-width: 900px) 830px, 100vw" drift parallax={0.4} />
+          <RevealImage image={heroImage} style={style} priority sizes="(min-width: 900px) 830px, 100vw" drift parallax={0.4} />
         </div>
         <div id="story-title" className="relative z-10 -mt-[0.6em] text-hero" style={{ textShadow: "0 8px 40px rgba(0,0,0,0.55)" }}>
           <Title story={story} stacked className="leading-[0.86]" />
         </div>
         <Subtitle story={story} className="mt-6" delay={1.1} />
+        <HomeMeta story={story} className="mt-6 justify-center" delay={1.25} />
         <PaletteBars palette={story.palette} className="mt-10" delay={1.2} />
         <ScrollCue className="mt-10" />
       </section>
@@ -143,11 +175,12 @@ export function MaterialHero({ story }: { story: Story }) {
         <Eyebrow story={story} />
         <Title story={story} stacked className="text-title mt-6" />
         <Subtitle story={story} className="mt-5" />
+        <HomeMeta story={story} className="mt-6" />
         <ScrollCue className="mt-10 hidden lg:flex" />
       </div>
       <div className={cn("lg:col-span-7", imageFirst && "lg:order-1", layout === "arch" && "lg:pl-8")}>
         <RevealImage
-          image={images.hero}
+          image={heroImage}
           style={style}
           priority
           mask={mask}

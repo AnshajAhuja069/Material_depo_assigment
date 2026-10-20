@@ -1,33 +1,43 @@
 import { nextStory, type Story } from "@/data/stories";
+import { getHome } from "@/data/homes";
 import { ThemeStyle } from "@/components/theme/ThemeStyle";
 import { ChapterRail } from "@/components/story/ChapterRail";
 import { MaterialHero } from "@/components/story/MaterialHero";
-import { StoryIntro } from "@/components/story/StoryIntro";
-import { ApplicationGallery } from "@/components/story/ApplicationGallery";
-import { SignatureInterlude } from "@/components/story/SignatureInterlude";
-import { MaterialLanguage } from "@/components/story/MaterialLanguage";
-import { MaterialDetail } from "@/components/story/MaterialDetail";
-import { BoardPreview } from "@/components/story/BoardPreview";
-import { SourceReferences } from "@/components/story/SourceReferences";
 import { NextStory } from "@/components/story/NextStory";
+import { HomeSelectionProvider } from "@/components/curation/HomeSelection";
+import { HomeOverview } from "@/components/curation/HomeOverview";
+import { MaterialFlatLay } from "@/components/curation/MaterialFlatLay";
+import { RoomExplorer } from "@/components/curation/RoomExplorer";
+import { WholeHomeReveal } from "@/components/curation/WholeHomeReveal";
+import { MaterialMatrix } from "@/components/curation/MaterialMatrix";
+import { CohesionRationale } from "@/components/curation/CohesionRationale";
+import { MoodboardSection } from "@/components/curation/MoodboardSection";
+import { MaterialSources } from "@/components/curation/MaterialSources";
+
+const chapters = ["The Home", "The Materials", "The Rooms", "The Connections", "The Cohesion"] as const;
 
 /**
- * One editorial sequence for every story: experience the material first,
- * then meet the real product, then the original composition.
+ * One whole-home sequence per story:
+ * the theme → the home → its materials → room by room → how they connect →
+ * why they work → the composition → sources → the next home.
  */
 export function MaterialStoryLayout({ story }: { story: Story }) {
+  const home = getHome(story.slug);
   return (
     <article className="mx-auto max-w-[1600px]" data-story={story.slug}>
       <ThemeStyle theme={story.theme} />
-      <ChapterRail chapters={story.chapters} />
-      <MaterialHero story={story} />
-      <StoryIntro story={story} />
-      <ApplicationGallery story={story} />
-      <SignatureInterlude story={story} />
-      <MaterialLanguage story={story} />
-      <MaterialDetail story={story} />
-      <BoardPreview story={story} />
-      <SourceReferences story={story} />
+      <ChapterRail chapters={chapters} />
+      <HomeSelectionProvider home={home}>
+        <MaterialHero story={story} />
+        <HomeOverview story={story} />
+        <MaterialFlatLay story={story} />
+        <RoomExplorer story={story} />
+        <WholeHomeReveal story={story} />
+        <MaterialMatrix story={story} />
+        <CohesionRationale story={story} />
+        <MoodboardSection story={story} />
+      </HomeSelectionProvider>
+      <MaterialSources story={story} />
       <NextStory next={nextStory(story)} />
     </article>
   );

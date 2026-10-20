@@ -1,6 +1,8 @@
 # Material Stories
 
-**Five Materials. Five Stories. Infinite Possibilities.**
+**Five Stories. Five Homes. One Language of Design.**
+
+Each story is a complete home: 6–7 curated materials (real Material Depot products, verified 20 Oct 2026, plus clearly labelled conceptual finishes) applied across three rooms, with a material matrix, room-by-room combinations and a written cohesion rationale.
 
 An immersive digital exhibition of five material narratives, built as an independent visual-storytelling concept for the
 *Visual Designer — Tiles* hiring process at Material Depot. It is **not** an official Material Depot website or a commissioned
@@ -32,22 +34,26 @@ Checks: `npm run lint`, `npm run typecheck`.
 | Route | Content |
 | --- | --- |
 | `/` | The exhibition: opening, the assignment, the challenge, the approach, the collection, the five boards, the 4 × 8 ft display concept |
-| `/stories/tidal-ritual` | 01 Tidal Ritual — TL 03643 E |
-| `/stories/nordic-daylight` | 02 Nordic Daylight — TL 06117 |
-| `/stories/casa-terracotta` | 03 Casa Terracotta — TL 05181 (listed as discontinued; shown as a design exploration) |
-| `/stories/monaco-after-dark` | 04 Monaco After Dark — TL 05819 |
-| `/stories/botanical-sanctuary` | 05 Botanical Sanctuary — TL 06127 |
+| `/stories/tidal-ritual` | 01 Tidal Ritual — A Coastal Home (living, kitchen, bathroom) |
+| `/stories/nordic-daylight` | 02 Nordic Daylight — A Scandinavian Home (living, kitchen, bedroom) |
+| `/stories/casa-terracotta` | 03 Casa Terracotta — A Mediterranean Home (living, kitchen, balcony) |
+| `/stories/monaco-after-dark` | 04 Monaco After Dark — A Contemporary Luxury Home (living, dining, powder room) |
+| `/stories/botanical-sanctuary` | 05 Botanical Sanctuary — A Biophilic Home (living, dining nook, bathroom) |
 
 ## Structure
 
 ```
 src/
-  data/stories.ts          single source of truth: copy, palettes, themes, products, images, links
+  data/materials.ts        verified materials catalogue (codes, finishes, sizes, listed uses, product images, URLs)
+  data/homes.ts            the five homes: curated materials, rooms, room-material mappings, rationale
+  data/stories.ts          story identity: copy, palettes, themes, motion, original board references
   data/site.ts             site copy, Figma links, neutral home theme
   data/image-manifest.json generated — intrinsic sizes + provenance of every image
   lib/                     motion tokens, theme helpers, image helper
   components/motion/       reveal primitives, page transition, Lenis + MotionConfig provider
-  components/story/        the story-page chapters (hero → intro → applications → signature → language → material → board → sources → next)
+  components/curation/     whole-home sections: overview, material flat-lay, room explorer, whole-home reveal,
+                           material matrix, cohesion rationale, moodboard, sources (shared selection context)
+  components/story/        hero, chapter rail, layout, next-story transition
   components/home/         homepage scenes
   components/boards/       full-resolution board viewer
 scripts/build-assets.mjs   asset pipeline (crops + WebP + manifest)
@@ -70,6 +76,10 @@ into `assets-src/<story>/<name>.png` (same file name), then run `npm run assets`
 re-labelled automatically.
 
 The Nordic Daylight moodboard is a composition from the Figma canvas that was not placed on the final board; the site labels it as such.
+
+## Revising the boards
+
+See [docs/figma-revision-handoff.md](docs/figma-revision-handoff.md) for the exact products, rooms and pairings for the five V2 boards. When a board is ready, set `revisedBoard` in `src/data/homes.ts`.
 
 ## Motion & accessibility
 

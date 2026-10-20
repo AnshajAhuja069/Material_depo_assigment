@@ -3,9 +3,9 @@ import { ScrollWords } from "@/components/motion/ScrollWords";
 import { Reveal } from "@/components/motion/Reveal";
 
 const questions = [
-  "How can a tile communicate an emotion?",
-  "How can one material transform different spaces?",
-  "How can physical displays help customers make faster, more confident design choices?",
+  "How do different materials become one design language?",
+  "How does one palette adapt from living room to kitchen to bath without repeating itself?",
+  "How can a display help customers choose a combination of materials, not just a single tile?",
 ];
 
 /** Scene 03 — the three questions behind the exploration. */
@@ -19,7 +19,7 @@ export function ChallengeQuestions() {
         <div className="lg:col-span-9">
           <AnimatedHeadline
             id="challenge-heading"
-            text="From Material Selection to Material Experience"
+            text="From Material Selection to Material Curation"
             className="display text-headline max-w-4xl"
           />
           <ol className="mt-16 border-t hairline">

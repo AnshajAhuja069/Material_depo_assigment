@@ -11,6 +11,7 @@ import { usePageTransition } from "@/components/motion/PageTransition";
 import { AnimatedHeadline } from "@/components/motion/AnimatedHeadline";
 import { useReducedMotionSafe } from "@/components/motion/hooks";
 import { themeVars } from "@/lib/theme";
+import { getHome } from "@/data/homes";
 
 const cssVarsOnly = (vars: Record<string, string>) => Object.fromEntries(Object.entries(vars).filter(([k]) => k.startsWith("--")));
 
@@ -60,7 +61,7 @@ export function NextStory({ next }: { next: Story | null }) {
             <motion.div className="absolute inset-0" style={{ clipPath: imgClip }}>
               <motion.div className="absolute inset-0" style={{ scale: imgScale }}>
                 {next ? (
-                  <Image src={next.images.hero.src} alt="" fill sizes="(min-width: 900px) 880px, 100vw" className="object-cover" />
+                  <Image src={getHome(next.slug).heroImage.src} alt="" fill sizes="(min-width: 900px) 880px, 100vw" className="object-cover" />
                 ) : (
                   <div className="flex h-full">
                     {stories.map((s) => (
@@ -77,7 +78,7 @@ export function NextStory({ next }: { next: Story | null }) {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <AnimatedHeadline as="p" text={title} className="display text-title" />
-              {next ? <p className="display mt-3 text-xl italic opacity-75 sm:text-2xl">{next.subtitle}</p> : null}
+              {next ? <p className="display mt-3 text-xl italic opacity-75 sm:text-2xl">{getHome(next.slug).name} · {next.subtitle}</p> : null}
             </div>
             <span className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-current/30 transition-all duration-500 group-hover:scale-110 group-hover:bg-[var(--ink)] group-hover:text-[var(--bg)] sm:h-20 sm:w-20">
               <ArrowRight size={22} aria-hidden className="transition-transform duration-500 group-hover:translate-x-1" />

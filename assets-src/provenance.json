@@ -18,5 +18,14 @@
   "nordic-daylight/swatch": "figma-raw",
   "casa-terracotta/swatch": "figma-raw",
   "monaco-after-dark/swatch": "board-crop",
-  "botanical-sanctuary/swatch": "board-crop"
+  "botanical-sanctuary/swatch": "board-crop",
+  "tidal-ritual/living": "ai-concept",
+  "tidal-ritual/kitchen": "ai-concept",
+  "nordic-daylight/bedroom": "ai-concept",
+  "casa-terracotta/living": "ai-concept",
+  "casa-terracotta/balcony": "ai-concept",
+  "monaco-after-dark/living-room": "ai-concept",
+  "monaco-after-dark/dining": "ai-concept",
+  "botanical-sanctuary/living": "ai-concept",
+  "monaco-after-dark/powder": "ai-concept"
 }

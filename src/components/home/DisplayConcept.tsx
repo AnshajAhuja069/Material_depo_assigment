@@ -9,6 +9,9 @@ import { AnimatedHeadline } from "@/components/motion/AnimatedHeadline";
 import { Reveal } from "@/components/motion/Reveal";
 import { instant, useReducedMotionSafe } from "@/components/motion/hooks";
 import { ease } from "@/lib/motion";
+import { getHome } from "@/data/homes";
+import { getMaterial } from "@/data/materials";
+import { SampleImage } from "@/components/curation/SampleImage";
 
 /**
  * A 1:2 re-composition of a board for a 4 × 8 ft surface. Built from the same
@@ -16,6 +19,7 @@ import { ease } from "@/lib/motion";
  */
 function DisplayPanel({ story }: { story: Story }) {
   const dark = story.theme.scheme === "dark";
+  const home = getHome(story.slug);
   return (
     <div
       className="@container relative flex aspect-[1/2] w-full flex-col overflow-hidden shadow-[0_30px_50px_-30px_rgba(0,0,0,0.45)]"
@@ -34,25 +38,36 @@ function DisplayPanel({ story }: { story: Story }) {
           {story.subtitle}
         </p>
       </div>
-      <div className="relative mx-[6cqw] mt-[5cqw] h-[38%]">
-        <Image src={story.images.hero.src} alt="" fill sizes="240px" className="object-cover" />
+      {/* Three rooms: one home */}
+      <div className="relative mx-[6cqw] mt-[5cqw] h-[30%]">
+        <Image src={home.rooms[0].image.src} alt="" fill sizes="240px" className="object-cover" />
       </div>
-      <div className="mx-[6cqw] mt-[3cqw] grid h-[26%] grid-cols-2 gap-[3cqw]">
-        <div className="relative bg-black/5">
-          <Image src={story.images.tile.src} alt="" fill sizes="120px" className="object-cover" />
-          <span className="absolute bottom-[2cqw] left-[2cqw] bg-white/90 px-[2cqw] py-[1cqw] font-semibold uppercase text-black" style={{ fontSize: "3cqw" }}>
-            Sample
-          </span>
-        </div>
-        <div className="relative">
-          <Image src={story.images.moodboard.src} alt="" fill sizes="120px" className="object-cover" />
-        </div>
+      <div className="mx-[6cqw] mt-[2cqw] grid h-[14%] grid-cols-2 gap-[2cqw]">
+        {home.rooms.slice(1).map((r) => (
+          <div key={r.id} className="relative">
+            <Image src={r.image.src} alt="" fill sizes="120px" className="object-cover" />
+          </div>
+        ))}
       </div>
-      <div className="relative mx-[6cqw] mt-[3cqw] h-[9%]">
-        <Image src={story.images.detail.src} alt="" fill sizes="240px" className="object-cover" />
+      {/* Physical sample shelf: every material, at true size on the real panel */}
+      <p className="mx-[6cqw] mt-[4cqw] font-semibold uppercase tracking-wider opacity-60" style={{ fontSize: "2.8cqw" }}>
+        Sample shelf
+      </p>
+      <div className="mx-[6cqw] mt-[1.5cqw] grid gap-[2cqw]" style={{ gridTemplateColumns: "repeat(3, minmax(0,1fr))" }}>
+        {home.materials.slice(0, 6).map((c) => {
+          const m = getMaterial(c.material);
+          return (
+            <div key={c.material}>
+              <div className="relative aspect-square overflow-hidden">
+                <SampleImage material={m} sizes="80px" height={200} />
+              </div>
+              <p className="mt-[0.8cqw] font-semibold leading-none" style={{ fontSize: "2.6cqw" }}>{m.code ?? "Concept"}</p>
+            </div>
+          );
+        })}
       </div>
       <p className="mt-auto px-[6cqw] pb-[5cqw] font-semibold uppercase tracking-wider opacity-70" style={{ fontSize: "3.2cqw" }}>
-        {story.product.code} · {story.product.size}
+        {home.name} · {home.materials.length} materials
       </p>
     </div>
   );
@@ -88,7 +103,7 @@ export function DisplayConcept() {
           </p>
           <p>
             Colour coding makes each collection recognisable from across the floor. A consistent editorial system lets customers scan several
-            displays quickly. Large application visuals communicate the mood, while samples and complementary materials explain what creates it.
+            displays quickly. Three room visuals show the language across a home, and a shelf of real samples (floor, wall, joinery, counter, accent) lets customers handle the whole combination, not a single tile.
           </p>
         </Reveal>
       </div>
@@ -182,8 +197,7 @@ export function DisplayConcept() {
         <Reveal className="border-t hairline pt-5" delay={0.16}>
           <p className="eyebrow">Display ≠ tile size</p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            The 4 × 8 ft panel is a mounting surface. The products themselves range from 300 × 100 mm kitkat tiles to 1200 × 600 mm slabs, and real
-            samples would be fixed to the panel at their true size.
+            The 4 × 8 ft panel is a mounting surface. Each home combines tiles from 300 × 100 mm to 1200 × 600 mm with 8 × 4 ft laminate sheets and quartz slabs, so the shelf carries hand samples of each, labelled with product codes.
           </p>
         </Reveal>
       </div>
